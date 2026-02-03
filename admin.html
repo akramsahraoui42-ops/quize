@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>لوحة المشرف</title>
+</head>
+<body>
+
+<h3>دخول المشرف</h3>
+<input type="password" id="password">
+<button onclick="login()">دخول</button>
+
+<div id="results" style="display:none"></div>
+
+<script>
+function login() {
+    if (document.getElementById("password").value === "1234") {
+        let data = JSON.parse(localStorage.getItem("results")) || [];
+        data.sort((a,b) => a.timeUsed - b.timeUsed);
+
+        let html = "<h2>النتائج</h2>";
+        data.forEach((r,i) => {
+            html += `<p>${i+1} - ${r.name} | الزمن: ${r.timeUsed}s</p>`;
+        });
+
+        document.getElementById("results").innerHTML = html;
+        document.getElementById("results").style.display = "block";
+    } else {
+        alert("كلمة السر خاطئة");
+    }
+}
+</script>
+
+</body>
+</html>
